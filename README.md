@@ -1,5 +1,5 @@
 # chasuoxie
-查缩写
+[查缩写](https://www.expshort.com/)
 
 每每看到一些计算机的缩写，总是好奇到底全称是什么。
 
