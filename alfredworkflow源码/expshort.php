@@ -4,7 +4,7 @@ require_once('workflows.php');
 
 class Expshort{
 
-	private $url = "https://www.expshort.com/api.php?short=";
+	private $url = "http://www.expshort.com/api.php?short=";
 	
 	function __construct() {
 		$this->workflows = new Workflows();
@@ -26,13 +26,16 @@ class Expshort{
 			  		);
 				} else {
 					$data = $res->data;
-					$this->workflows->result( 
-						'',
-						$query,
-						$data->full,//title
-						$data->desc,//subtitle
-						"icon.png"//icon
-					);
+					foreach ($data as $key => $value) {
+						$this->workflows->result( 
+							'',
+							$query,
+							$value->full,//title
+							$value->desc,//subtitle
+							"icon.png"//icon
+						);
+					}
+					
 				}
 			}else{
 				$this->workflows->result(	
