@@ -8,7 +8,7 @@
 		if (!$conn) {
 		    die("Connection failed: " . mysqli_connect_error());
 		}
-		$sql = "SELECT SQL_CACHE count(1) as total FROM `short-words`.words WHERE `status`=1";
+		$sql = "SELECT SQL_CACHE count(1) as total FROM `www_expshort_co`.words WHERE `status`=1";
 		$result = $conn->query($sql);
 		if ($result->num_rows > 0) {
 		    // 输出数据
@@ -43,7 +43,7 @@
 			    die("Connection failed: " . mysqli_connect_error());
 			}
 			//查询词条是否已存在
-			$sql = "SELECT SQL_CACHE * FROM `short-words`.words WHERE `lower`='{$lower}' LIMIT 1";
+			$sql = "SELECT SQL_CACHE * FROM `www_expshort_co`.words WHERE `full`='{$full}' AND `lower`='{$lower}' LIMIT 1";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
 		    	echo json_encode(['error'=>1, 'msg'=>'词条已存在', 'data'=>[]], true);
@@ -51,7 +51,7 @@
 			}
 
 			//插入词条
-			$sql = "INSERT INTO `short-words`.words (`short`, `lower`, `full`, `desc`, `author`) VALUES ('{$short}', '{$lower}', '{$full}', '{$desc}', '{$author}')";
+			$sql = "INSERT INTO `www_expshort_co`.words (`short`, `lower`, `full`, `desc`, `author`) VALUES ('{$short}', '{$lower}', '{$full}', '{$desc}', '{$author}')";
 			if ($conn->query($sql) === TRUE) {
 				$conn->close();
 		    	echo json_encode(['error'=>0, 'msg'=>'插入成功，审核通过后即可查询'], true);
@@ -72,13 +72,16 @@
 			    die("Connection failed: " . mysqli_connect_error());
 			}
 
-			$sql = "SELECT SQL_CACHE * FROM `short-words`.words WHERE `lower`='{$short}' AND `status`=1 LIMIT 1";
+			$sql = "SELECT SQL_CACHE `full`,`desc` FROM `www_expshort_co`.words WHERE `lower`='{$short}' AND `status`=1";
 			$result = $conn->query($sql);
 			if ($result->num_rows > 0) {
-			    // 输出数据
-			    $row = $result->fetch_assoc();
+			    $list = [];
+			    while($row = $result->fetch_assoc()) {
+			    	$list[] = $row;
+			    }
 				$conn->close();
-		    	echo json_encode(['error'=>0, 'msg'=>'', 'data'=>['full'=>$row['full'], 'desc'=>$row['desc']]], true);
+			    // 输出数据
+		    	echo json_encode(['error'=>0, 'msg'=>'', 'data'=>$list], true);
 		    	exit;
 			} else {
 				$conn->close();
