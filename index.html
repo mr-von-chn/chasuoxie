@@ -71,7 +71,10 @@
 				    		if (!res.data) {
 				    			$('.result').append('<div class="well">词条不存在</div>');
 				    		} else {
-				    			$('.result').append('<div class="well">全称：'+res.data.full+"<br/>描述："+res.data.desc+'</div>');
+				    			for (var i = 0; i <= res.data.length - 1; i++) {
+				    				res.data[i]
+				    				$('.result').append('<div class="well">全称：'+res.data[i].full+"<br/>描述："+res.data[i].desc+'</div>');
+				    			}
 				    		}
 				    	}, "json");
 				    	return false;
@@ -99,7 +102,7 @@
 		</style>
 		<footer class="footer">
 	      	<div class="container">
-	        	<p class="text-muted">该项目由mr-von-chn发起，github地址：<a href="https://github.com/mr-von-chn/expshort/">github.com/mr-von-chn/expshort/</a></p>
+	        	<p class="text-muted">该项目由mr-von-chn发起，github地址：<a href="https://github.com/mr-von-chn/chasuoxie">github.com/mr-von-chn/chasuoxie</a></p>
 	      	</div>
 	    </footer>
     </body>
