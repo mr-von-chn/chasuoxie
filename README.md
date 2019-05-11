@@ -22,3 +22,7 @@
 如图：输入ls，l字母输入发起了一次查询，返回无结果；输入s后才查到ls
 
 ![gif](https://raw.githubusercontent.com/mr-von-chn/expshort/master/2019-05-11%2011_38_11.gif)
+
+#### P.S
+
+此workflow是参考![weather-workflow](https://github.com/wensonsmith/weather-workflow)基础上进行修改的，在此致谢！
